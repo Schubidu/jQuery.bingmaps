@@ -1,0 +1,18 @@
+
+body {
+	margin: 0 auto;
+	width: 500px;
+}
+.bingmaps {
+	width: 500px;
+	height: 500px;
+	position: relative;
+}
+
+.infobox {
+	white-space: nowrap;
+	border: 1px solid #000;
+	background: #fff;
+	position: absolute;
+	width: auto;
+}
