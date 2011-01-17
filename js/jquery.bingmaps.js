@@ -52,6 +52,7 @@
 		this.map = map;
 		this.data = obj;
 		this.pin = null;
+		this.hasHtml = false;
 	}
 
 	// Add the infobox div to the page
@@ -65,15 +66,18 @@
 			var cfn = $.proxy(this.createFn, this);
 			$('img[src="' + this.pin.getIcon() + '"]', this.map.getRootElement()).parent().append(this.div);
 			cfn(div, this.data);
+			this.hasHtml = $('*', div).length != 0 || div.text() != '';
 		}
-		this.pin.setOptions({zIndex: 1000});
-		this.div.css('visibility', "visible");
-		this.div.parent().css('overflow', "visible");
+		if(this.hasHtml) {
+			this.pin.setOptions({zIndex: 1000});
+			this.div.css('visibility', "visible");
+			this.div.parent().css('overflow', "visible");
+		}
 	};
 
 	// Hide the infobox
 	InfoBox.prototype.hide = function() {
-		if (this.div != undefined) {
+		if (this.div != undefined && this.hasHtml) {
 			this.pin.setOptions({zIndex: 1});
 			this.div.css('visibility', "hidden");
 			this.div.parent().css('overflow', "hidden");
